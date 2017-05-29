@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<link href="~/Content/Site.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-6 margin-top">
+        <a href="#" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-circle-arrow-down"></span> Withdrawal </a>
+        <a href="#" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-flash"></span> Quick Cash $100</a>
+        <a href="@Url.Action("Details","CheckingAccount")" class="btn btn-primary btn-lg btn-block">
+        <span class="glyphicon glyphicon-question-sign"></span>  Balance Inquiry</a>
+    </div>
+    
+    <div class="col-md-6 margin-top">
+        <a href="#" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-print"></span> Print Statement</a>
+        <a href="#" class="btn btn-primary btn-lg btn-block"><span class="glyphicon glyphicon-transfer"></span> Transfer Funds</a>
+        <a href="@Url.Action("Deposit","Transaction" , new { checkingAccountId = ViewBag.CheckingAccountId })" class="btn btn-primary btn-lg btn-block">
+        <span class="glyphicon glyphicon-circle-arrow-up"></span> Deposit </a>
+    </div>
+</div>
+
+@ViewBag.Pin
+
+You are using @Request.Browser.Browser , and that's ok! Email us at support@mvc.com or send us a tweet @@mvcatm.
+
+@{ var amounts = new List<decimal> { 100, 22.3m, -2, 100 }; }
+
+<ul>
+    @foreach (var amount in amounts)
+    {
+
+        <li>@formatAmount(amount)</li>
+
+    }
+</ul>
+
+    @helper formatAmount(decimal amount)
+    {
+        var color = "green";
+        if (amount < 0)
+        {
+            color = "red";
+        }
+
+        <span style="color: @color">@String.Format("{0:c}",amount)</span>
+    }
